@@ -51,9 +51,9 @@ class HomePage extends StatelessWidget {
                       expiryDate: tarjeta.expiracyDate, 
                       cardHolderName: tarjeta.cardHolderName, 
                       cvvCode: tarjeta.cvv, 
-                      showBackView: false, 
+                      showBackView: true, 
                       onCreditCardWidgetChange: (credit){
-                                
+
                       }
                     ),
                   ),
