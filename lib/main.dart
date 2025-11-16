@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/bloc/pagar_bloc.dart';
 import 'pages/home_page.dart';
 import 'pages/pago_completo_page.dart';
 
@@ -12,20 +14,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Stripe Payment',
-      initialRoute: 'home',
-      routes: {
-        'home': (context) => const HomePage(),
-        'pago_completo': (context) => const PagoCompletoPage(),
-      },
-      theme: ThemeData.light().copyWith(
-        primaryColor: const Color(0xff284879),
-        scaffoldBackgroundColor: const Color(0xff21232A),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff284879),
-          foregroundColor: Colors.white
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => PagarBloc()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Stripe Payment',
+        initialRoute: 'home',
+        routes: {
+          'home': (context) => const HomePage(),
+          'pago_completo': (context) => const PagoCompletoPage(),
+        },
+        theme: ThemeData.light().copyWith(
+          primaryColor: const Color(0xff284879),
+          scaffoldBackgroundColor: const Color(0xff21232A),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xff284879),
+            foregroundColor: Colors.white
+          ),
         ),
       ),
     );
