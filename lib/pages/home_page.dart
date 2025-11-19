@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
+import '../bloc/bloc/pagar_bloc.dart';
 import '../data/tarjetas.dart';
 import '../helpers/helpers.dart';
 import '../widgets/total_pay_button.dart';
@@ -42,19 +44,19 @@ class HomePage extends StatelessWidget {
             
                 return GestureDetector(
                   onTap: (){
+                    context.read<PagarBloc>().onSeleccionarTarjeta(tarjeta);
                     Navigator.push(context, navegarFadeIn(context, TarjetaPage()));
                   },
                   child: Hero(
                     tag: tarjeta.cardNumber,
                     child: CreditCardWidget(
+                      isSwipeGestureEnabled: false,
                       cardNumber: tarjeta.cardNumberHidden, 
                       expiryDate: tarjeta.expiracyDate, 
                       cardHolderName: tarjeta.cardHolderName, 
                       cvvCode: tarjeta.cvv, 
-                      showBackView: true, 
-                      onCreditCardWidgetChange: (credit){
-
-                      }
+                      showBackView: false, 
+                      onCreditCardWidgetChange: (CreditCardBrand brand) {},
                     ),
                   ),
                 );
